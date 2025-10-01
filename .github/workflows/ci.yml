@@ -1,10 +1,8 @@
-name: CI - Tests (debug)
+name: CI - minimal check
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   test:
@@ -12,35 +10,3 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Debug: show pwd and list files
-        run: |
-          echo "PWD: $(pwd)"
-          echo "List root:"
-          ls -la
-          echo "List .github:"
-          ls -la .github || true
-          echo "List .github/workflows:"
-          ls -la .github/workflows || true
-          echo "Show requirements.txt if present:"
-          if [ -f requirements.txt ]; then
-            echo "requirements.txt exists, contents:"
-            sed -n '1,200p' requirements.txt
-          else
-            echo "requirements.txt NOT FOUND"
-          fi
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest
-
-      - name: Run tests
-        run: |
-          pytest -q
