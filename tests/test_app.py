@@ -18,4 +18,11 @@ def test_echo():
     client=app.test_client()
     resp=client.get("/echo/cicd")
     assert resp.status_code==200
-    assert resp.json == {"echo":"cicd"}    
+    assert resp.json == {"echo":"cicd"} 
+
+
+def test_sum():
+    client=app.test_client()
+    resp=client.get("/sum?a=10&b=15")
+    assert resp.status_code==200
+    assert resp.json=={"sum":25}       
