@@ -11,7 +11,7 @@ def index():
 
 @app.route("/health")
 def health():
-    return jsonify({"status":"ok"})
+    return jsonify({"status":"sagar"})
 
 @app.route("/echo/<msg>")
 def echo(msg):
